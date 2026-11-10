@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle de abastecimento grátis | Auto Controller System</title>
+  <meta name="description" content="Ferramenta gratuita para registrar abastecimentos, acompanhar o km/L de cada veículo e exportar relatórios em Excel e PDF. Os dados ficam salvos no seu navegador.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://autocontrollersystem.com.br/controle-de-abastecimento.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="Controle de abastecimento · Auto Controller">
+  <meta property="og:description" content="Registre abastecimentos, acompanhe o km/L da frota e exporte relatórios em Excel e PDF. Grátis.">
+  <meta name="theme-color" content="#1B1F27">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/barlow-semi-condensed-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/barlow-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="abastecimento.css?v=39">
+  <script src="abastecimento.js?v=39" defer></script>
+</head>
+<body>
+  <!-- Ícones (traço, cor pelo CSS) -->
+  <svg width="0" height="0" class="sprite" aria-hidden="true">
+    <symbol id="a-mais" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="a-veiculo" viewBox="0 0 24 24"><path d="M3 13l2-6h14l2 6v5H3z"/><circle cx="7" cy="18" r="1.5"/><circle cx="17" cy="18" r="1.5"/></symbol>
+    <symbol id="a-pessoa" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></symbol>
+    <symbol id="a-preco" viewBox="0 0 24 24"><path d="M12 2v20M17 6H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></symbol>
+    <symbol id="a-graf" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+    <symbol id="a-xls" viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 10h16M10 4v16"/></symbol>
+    <symbol id="a-pdf" viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6zM14 2v6h6"/></symbol>
+    <symbol id="a-baixar" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></symbol>
+    <symbol id="a-subir" viewBox="0 0 24 24"><path d="M12 21V9M7 14l5-5 5 5M4 3h16"/></symbol>
+    <symbol id="a-ajuda" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.5-2.5 2-2.5 3.5M12 17h.01"/></symbol>
+    <symbol id="a-editar" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/></symbol>
+    <symbol id="a-lixo" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></symbol>
+    <symbol id="a-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="a-voltar" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></symbol>
+  </svg>
+
+  <header class="ab-topo">
+    <div class="ab-in">
+      <a href="./" class="ab-logo" aria-label="Auto Controller System - início"><img src="assets/logo-auto-controller-claro.png" alt="Auto Controller - Gestão Inteligente" width="480" height="93"></a>
+      <a href="./" class="btn cl pq"><svg class="ic"><use href="#a-voltar"/></svg>Voltar ao site</a>
+    </div>
+  </header>
+
+  <section class="ab-hero">
+    <div class="ab-in">
+      <p class="ab-k">Ferramenta gratuita · Gestão de frota</p>
+      <h1>Controle de abastecimento</h1>
+      <p class="ab-lead">Registre cada abastecimento, acompanhe o km/L de cada veículo e exporte relatórios em Excel e PDF. Os dados ficam salvos só neste navegador.</p>
+      <div class="ab-barra" role="toolbar" aria-label="Ações">
+        <button type="button" class="btn" data-abrir="dlg-abast"><svg class="ic"><use href="#a-mais"/></svg>Abastecimento</button>
+        <button type="button" class="btn escuro" data-abrir="dlg-veiculos"><svg class="ic"><use href="#a-veiculo"/></svg>Veículos</button>
+        <button type="button" class="btn escuro" data-abrir="dlg-motoristas"><svg class="ic"><use href="#a-pessoa"/></svg>Motoristas</button>
+        <button type="button" class="btn escuro" data-abrir="dlg-precos"><svg class="ic"><use href="#a-preco"/></svg>Preços</button>
+        <button type="button" class="btn escuro" data-abrir="dlg-relatorio"><svg class="ic"><use href="#a-graf"/></svg>Relatório</button>
+        <span class="ab-sep" aria-hidden="true"></span>
+        <button type="button" class="btn escuro" id="b-excel"><svg class="ic"><use href="#a-xls"/></svg>Excel</button>
+        <button type="button" class="btn escuro" id="b-pdf"><svg class="ic"><use href="#a-pdf"/></svg>PDF</button>
+        <span class="ab-sep" aria-hidden="true"></span>
+        <button type="button" class="btn escuro" id="b-backup"><svg class="ic"><use href="#a-baixar"/></svg>Backup</button>
+        <button type="button" class="btn escuro" id="b-restaurar"><svg class="ic"><use href="#a-subir"/></svg>Restaurar</button>
+        <button type="button" class="btn escuro" data-abrir="dlg-ajuda"><svg class="ic"><use href="#a-ajuda"/></svg>Como usar</button>
+        <input type="file" id="arq-restaurar" accept=".json,application/json" hidden>
+      </div>
+    </div>
+  </section>
+
+  <main class="ab-in ab-main">
+    <noscript><p class="ab-aviso">Ative o JavaScript do navegador para usar o controle de abastecimento.</p></noscript>
+    <p class="ab-aviso" id="aviso-exemplos" hidden><span><b>Estes são dados de exemplo</b> para você conhecer a ferramenta.</span><button type="button" class="btn pq" id="b-limpar-exemplos">Apagar exemplos e começar</button></p>
+    <p class="ab-aviso erro" id="aviso-armazenamento" hidden>Este navegador não está deixando salvar dados (janela anônima ou bloqueio de cookies). Use o Backup antes de fechar a página.</p>
+
+    <div class="ab-kpis" id="kpis"></div>
+
+    <form class="ab-card ab-filtros" id="filtros">
+      <label>Veículo<select name="veiculo"><option value="">Todos</option></select></label>
+      <label>Motorista<select name="motorista"><option value="">Todos</option></select></label>
+      <label>Combustível<select name="combustivel"><option value="">Todos</option></select></label>
+      <label>De<input type="date" name="de"></label>
+      <label>Até<input type="date" name="ate"></label>
+      <div class="ab-fb"><button type="submit" class="btn">Buscar</button><button type="button" class="btn cl" id="b-limpar">Limpar</button></div>
+    </form>
+
+    <div class="ab-grade">
+      <section class="ab-card">
+        <div class="ab-tit"><h2>Abastecimentos</h2><small id="info-lista"></small></div>
+        <div class="ab-tw"><table class="ab-tab lista"><thead><tr><th>Data</th><th>Veículo</th><th>Combustível</th><th class="n">Litros</th><th class="n">R$/L</th><th class="n">Total</th><th class="n">Km atual</th><th class="n">Km rodados</th><th>Km/L</th><th>Motorista</th><th><span class="sr">Ações</span></th></tr></thead><tbody id="lista"></tbody></table></div>
+        <p class="ab-vazio" id="vazio" hidden>Nenhum abastecimento neste filtro. Toque em <b>Abastecimento</b> para registrar o primeiro.</p>
+      </section>
+      <aside class="ab-card">
+        <div class="ab-tit"><h2>Km/L por veículo</h2><small>traço = meta</small></div>
+        <div id="por-veiculo"></div>
+        <div id="alertas"></div>
+        <div class="ab-leg"><span class="kml g"><i></i>na meta</span><span class="kml y"><i></i>até 10% abaixo</span><span class="kml r"><i></i>mais de 10% abaixo</span></div>
+      </aside>
+    </div>
+
+    <p class="ab-priv">Seus dados não são enviados para a Auto Controller: ficam salvos neste navegador. Use <b>Backup</b> para guardar uma cópia e <b>Restaurar</b> em outro computador ou celular.</p>
+    <div class="ab-cta"><div><b>Quer o km e o consumo lançados sozinhos?</b><p>Com a telemetria da Auto Controller, o km vem do rastreador e os alertas de consumo chegam na hora.</p></div><a class="btn" href="./#contato">Falar com especialista</a></div>
+  </main>
+
+  <footer class="ab-rod"><div class="ab-in"><span>© 2026 Auto Controller System Ltda. Todos os direitos reservados.</span><a href="privacidade.html">Política de Privacidade</a></div></footer>
+
+  <!-- ===== Janelas ===== -->
+  <dialog id="dlg-abast" class="ab-dlg" aria-labelledby="t-abast">
+    <form method="dialog" id="f-abast" novalidate>
+      <div class="dlg-cab"><h2 id="t-abast">Novo abastecimento</h2><button type="button" class="btn-q" data-fechar aria-label="Fechar"><svg class="ic"><use href="#a-x"/></svg></button></div>
+      <input type="hidden" name="id">
+      <div class="g2">
+        <label>Data *<input type="date" name="data" required></label>
+        <label>Veículo *<select name="veiculo" required></select></label>
+      </div>
+      <div class="g2">
+        <label>Motorista<select name="motorista"><option value="">—</option></select></label>
+        <label>Combustível *<select name="combustivel" required></select></label>
+      </div>
+      <div class="g3">
+        <label>Litros *<input name="litros" inputmode="decimal" placeholder="0,0" required></label>
+        <label>Preço do litro (R$)<input name="preco" inputmode="decimal" placeholder="0,00"></label>
+        <label>Total (R$)<input name="total" inputmode="decimal" placeholder="calculado"></label>
+      </div>
+      <div class="g2">
+        <label>Km atual (hodômetro) *<input name="km" inputmode="numeric" placeholder="0" required><small id="dica-km"></small></label>
+        <label class="ab-check"><input type="checkbox" name="cheio" checked><span>Encheu o tanque<small>O km/L é calculado de um tanque cheio até o próximo.</small></span></label>
+      </div>
+      <label>Observação<input name="obs" maxlength="120" placeholder="Ex.: posto, nota fiscal, ocorrência"></label>
+      <p class="ab-erro" id="erro-abast" hidden></p>
+      <div class="dlg-rod"><button type="button" class="btn cl" data-fechar>Cancelar</button><button type="submit" class="btn" value="ok">Salvar</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="dlg-veiculos" class="ab-dlg" aria-labelledby="t-veic">
+    <div class="dlg-cab"><h2 id="t-veic">Veículos</h2><button type="button" class="btn-q" data-fechar aria-label="Fechar"><svg class="ic"><use href="#a-x"/></svg></button></div>
+    <div id="lista-veiculos" class="ab-lista"></div>
+    <form id="f-veiculo" class="ab-sub" novalidate>
+      <h3 id="t-veiculo-form">Adicionar veículo</h3>
+      <input type="hidden" name="id">
+      <div class="g2"><label>Placa *<input name="placa" maxlength="8" required placeholder="ABC1D23" autocapitalize="characters"></label><label>Descrição<input name="descricao" maxlength="40" placeholder="Ex.: caminhão toco, van, moto"></label></div>
+      <div class="g2"><label>Combustível<select name="combustivel"></select></label><label>Meta de km/L<input name="meta" inputmode="decimal" placeholder="Ex.: 8,0"></label></div>
+      <p class="ab-erro" hidden></p>
+      <div class="dlg-rod"><button type="button" class="btn cl" data-novo-veiculo hidden>Cancelar edição</button><button type="submit" class="btn">Salvar veículo</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="dlg-motoristas" class="ab-dlg" aria-labelledby="t-mot">
+    <div class="dlg-cab"><h2 id="t-mot">Motoristas</h2><button type="button" class="btn-q" data-fechar aria-label="Fechar"><svg class="ic"><use href="#a-x"/></svg></button></div>
+    <div id="lista-motoristas" class="ab-lista"></div>
+    <form id="f-motorista" class="ab-sub" novalidate>
+      <h3 id="t-motorista-form">Adicionar motorista</h3>
+      <input type="hidden" name="id">
+      <label>Nome *<input name="nome" maxlength="50" required></label>
+      <p class="ab-erro" hidden></p>
+      <div class="dlg-rod"><button type="button" class="btn cl" data-novo-motorista hidden>Cancelar edição</button><button type="submit" class="btn">Salvar motorista</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="dlg-precos" class="ab-dlg" aria-labelledby="t-precos">
+    <form id="f-precos" novalidate>
+      <div class="dlg-cab"><h2 id="t-precos">Preços do litro</h2><button type="button" class="btn-q" data-fechar aria-label="Fechar"><svg class="ic"><use href="#a-x"/></svg></button></div>
+      <p class="ab-nota">O preço entra sozinho no abastecimento novo. Você pode trocar em cada lançamento.</p>
+      <div id="campos-precos" class="g2"></div>
+      <div class="dlg-rod"><button type="button" class="btn cl" data-fechar>Cancelar</button><button type="submit" class="btn">Salvar preços</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="dlg-relatorio" class="ab-dlg largo" aria-labelledby="t-rel">
+    <div class="dlg-cab"><h2 id="t-rel">Relatório do período</h2><button type="button" class="btn-q" data-fechar aria-label="Fechar"><svg class="ic"><use href="#a-x"/></svg></button></div>
+    <p class="ab-nota" id="rel-periodo"></p>
+    <label>Nome da empresa ou frota <small>(sai no Excel e no PDF)</small><input id="empresa" maxlength="60" placeholder="Ex.: Transportes Exemplo"></label>
+    <h3>Por veículo</h3>
+    <div class="ab-tw"><table class="ab-tab compacta" id="rel-veiculos"></table></div>
+    <h3>Por motorista</h3>
+    <div class="ab-tw"><table class="ab-tab compacta" id="rel-motoristas"></table></div>
+    <div class="dlg-rod"><button type="button" class="btn cl" data-exportar="excel"><svg class="ic"><use href="#a-xls"/></svg>Baixar Excel</button><button type="button" class="btn" data-exportar="pdf"><svg class="ic"><use href="#a-pdf"/></svg>Baixar PDF</button></div>
+  </dialog>
+
+  <dialog id="dlg-ajuda" class="ab-dlg" aria-labelledby="t-ajuda">
+    <div class="dlg-cab"><h2 id="t-ajuda">Como usar</h2><button type="button" class="btn-q" data-fechar aria-label="Fechar"><svg class="ic"><use href="#a-x"/></svg></button></div>
+    <ol class="ab-passos">
+      <li><b>Cadastre os veículos</b> em Veículos, com a meta de km/L de cada um (o consumo esperado).</li>
+      <li><b>Cadastre os motoristas</b> e os <b>preços do litro</b>, se quiser que entrem sozinhos.</li>
+      <li><b>A cada abastecimento</b>, toque em Abastecimento e informe litros, preço e o km do painel (hodômetro).</li>
+      <li><b>Encha o tanque</b> sempre que puder: o km/L é calculado de um tanque cheio até o próximo. Abastecimentos parciais entram na conta do próximo tanque cheio.</li>
+      <li><b>Acompanhe as cores</b>: verde na meta, amarelo até 10% abaixo e vermelho mais de 10% abaixo. Queda forte pode ser km digitado errado, vazamento, problema mecânico ou desvio.</li>
+      <li><b>Exporte</b> em Excel ou PDF para o período filtrado e faça <b>Backup</b> de vez em quando.</li>
+    </ol>
+    <p class="ab-nota">Os dados ficam só neste navegador. Se limpar os dados do navegador, eles somem: por isso, guarde um Backup.</p>
+    <div class="dlg-rod"><button type="button" class="btn cl" id="b-exemplos">Carregar exemplos</button><button type="button" class="btn cl vermelho-txt" id="b-apagar-tudo">Apagar tudo</button><button type="button" class="btn" data-fechar>Entendi</button></div>
+  </dialog>
+
+  <div class="ab-toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

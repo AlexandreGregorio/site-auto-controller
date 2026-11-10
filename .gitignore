@@ -1,0 +1,6 @@
+# A Central fica em repositório separado (privado)
+central/
+*.zip
+*.log
+.DS_Store
+Thumbs.db

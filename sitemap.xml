@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Lista de páginas do site para os buscadores. Acrescente aqui novas páginas. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://autocontrollersystem.com.br/</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://autocontrollersystem.com.br/rastreamento-veicular.html</loc>
+    <lastmod>2026-10-28</lastmod>
+  </url>
+  <url>
+    <loc>https://autocontrollersystem.com.br/cameras-com-ia.html</loc>
+    <lastmod>2026-10-28</lastmod>
+  </url>
+  <url>
+    <loc>https://autocontrollersystem.com.br/bloqueador-antijammer.html</loc>
+    <lastmod>2026-10-28</lastmod>
+  </url>
+  <url>
+    <loc>https://autocontrollersystem.com.br/telemetria-veicular.html</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://autocontrollersystem.com.br/controle-de-abastecimento.html</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://autocontrollersystem.com.br/privacidade.html</loc>
+    <lastmod>2026-10-28</lastmod>
+  </url>
+  <url>
+    <loc>https://autocontrollersystem.com.br/sobre.html</loc>
+    <lastmod>2026-10-28</lastmod>
+  </url>
+</urlset>
